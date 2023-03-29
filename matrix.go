@@ -39,6 +39,16 @@ func MatrixAdd(res *matrix, A, B matrix) error {
 	return nil
 }
 
+func MatrixAddAgg(res *matrix, A []matrix) error {
+	for _, a := range A {
+		err := MatrixAdd(res, *res, a)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func MatrixMultiplyAndAdd(A, B []matrix) (matrix, error) {
 	var res matrix
 	if len(A) != len(B) {
